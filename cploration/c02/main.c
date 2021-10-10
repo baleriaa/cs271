@@ -26,14 +26,29 @@ char welcome[MAX_LIMIT];
 strcpy(welcome, hello);
 strcat(welcome, " ");
 strcat(welcome, name);
-printf("%s! ", welcome);
+printf("%s! \n", welcome);
 
 /** Exercise 2 **/ 
 int name_size = strlen(name);
-printf("Your name is %d characters long", name_size);
+printf("Your name is %d characters long\n", name_size);
 
 /** Exercise 2 **/ 
-
+char prof[8] = 
+{
+  'P','a','t','r','i','c','k','\0'
+};
+int first = strcmp(name, prof);
+if(first < 0)
+{
+  printf("%s is before %s", name, prof);
+}
+else if (first > 0)
+{
+  printf("%s is before %s", prof, name);
+}
+else
+{
+  printf("%s is %s", name, prof);
+}
 return 0;
 }
-
