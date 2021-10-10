@@ -1,5 +1,7 @@
-#include <string.h>
 #include <stdio.h>
+#include <string.h>
+
+
 #define MAX_LIMIT 100;
 
 int main()
@@ -8,7 +10,7 @@ int main()
 // declare a string with value
 char hello[] = "Hello";
 // declare an empty string
-char name[MAX_LIMIT];
+char name[100]; 
 
 // prompt user
 printf("What is your name? ");
@@ -20,8 +22,20 @@ scanf("%[^\n]s", name);
 // print out "hello <name>"
 printf("%s %s!\n\n", hello, name);
 
-/** Exercise 1 **/
+/** Exercise 1 **/ 
+char welcome[100];
+strcpy(welcome, hello);
+strcat(welcome, " ");
+strcat(welcome, name);
+printf("%s! ", welcome);
 
-char welcome[MAX_LIMIT];
-welcome = hello;
+/** Exercise 2 **/ 
+int welcome_size = sizeof(name);
+printf("Your name is %lu characters long", strlen(name));
+
+/** Exercise 2 **/ 
+
+
+return 0;
 }
+
