@@ -37,7 +37,30 @@ struct Symbol *find(char * key) {
 
 	//move in array until and empty
 	while(hashArray[hashIndex] != NULL) {
-		if(hashArray
+		if(hashArray[hashIndex]->key == key) {
+			return hashArray[hashIndex];
+		}
+		//go to next cell
+		++hashIndex;
+
+		//wrap around the table
+		hashIndex %= SIZE;
+
+		return NULL;
 	}
 }
 
+void display_table() {
+	int i = 0;
+
+	for(i = 0; i < SIZE; i++) {
+		
+		if(hashArray[i] != NULL) {
+			printf(" (%c, %d)", hashArray[i]->key, hashArray[i]->data);
+		} else {
+			printf(" ~~ ");
+		}
+	
+		printf("\n");
+	}
+}
