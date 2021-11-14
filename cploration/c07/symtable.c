@@ -57,7 +57,5 @@ void display_table() {
 		} else {
 			printf(" ~~ ");
 		}
-	
-		printf("\n");
 	}
 }
