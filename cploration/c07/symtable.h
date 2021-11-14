@@ -5,16 +5,18 @@
 #include "stdbool.h"
 #include "stdint.h"
 
-SYMBOL_TABLE_SIZE 100
 
-typdef int16_t hack_addr
+
+#define SYMBOL_TABLE_SIZE 100
+
+typedef int16_t hack_addr;
 
 typedef struct Symbol {
-	char name[SYMBOL_TABLE_SIZE];
+	char name;
 	int addr;
-}
+} Symbol;
 
-Symbol* hashArray[SYMBOL_TABLE_SIZE];
+struct Symbol* hashArray[SYMBOL_TABLE_SIZE];
 
 unsigned int hash(char *str);
 struct Symbol *find(char * key);

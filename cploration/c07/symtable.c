@@ -1,4 +1,4 @@
-#include "symtable.h"
+#include <symtable.h>
 
 unsigned int hash(char *str)
     {
