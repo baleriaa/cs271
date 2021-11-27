@@ -1,3 +1,5 @@
+#include "stdio.h"
+#include "string.h"
 #include "parser.h"
 #include "error.h"
 #include "symtable.h"
@@ -98,11 +100,32 @@ char *extract_label(const char *line, char* label){
 }
 
 void add_predefined_symbols(){
-
+	
 	for (int i = 0; i < NUM_PREDEFINED_SYMBOLS; i++){
 		predefined_symbol symbol = predefined_symbols[i];
 		symtable_insert(symbol);
 	}
 }
 
+bool parse_A_instruction(const char *line, a_instruction *instr){
+	char *s;
+	s = (char *)malloc(strlen(*line));
+	strcpy(s, line + 1);
+	char *s_end = NULL;
+	long result = strtol(s, &s_end, 10);
 
+	if (s == s_end){
+		label->instr;
+		label = (char *)malloc(strlen(line));
+		strcpy(label, s);
+		is_address->instr = false;
+	}
+	else if (*s_end != 0) {
+		return false;
+	}
+	else {
+		address->instr = result;
+		is_addr->instr = true;
+	}
+	return true;
+}
