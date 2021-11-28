@@ -1,4 +1,5 @@
 #include <symtable.h>
+#include "stdio.h"
 
     int hash (char *str)
     {
@@ -9,13 +10,14 @@
         return hash % SYMBOL_TABLE_SIZE;
     }
 
-void symtable_insert(char* name, hack_addr addr){
+void symtable_insert(char* key, hack_addr addr){
 	struct Symbol *item = (struct Symbol*) malloc(sizeof(struct Symbol));
+	item->name = (char*)malloc(strlen(key) + 1);
+	strcpy(item->name, key);
 	item->addr = addr;
-	item->name = name;
 
 	//get the hash
-	int hashIndex = hash(name);
+	int hashIndex = hash(key);
 
 	//move in array until an empty or deleted cell
 	while(hashArray[hashIndex] != NULL && hashArray[hashIndex]->name != NULL) {

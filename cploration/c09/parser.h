@@ -7,6 +7,8 @@
 #include "ctype.h"
 #include "stdbool.h"
 #include "stdint.h"
+#include "symtable.h"
+#include "hack.h"
 
 #define MAX_HACK_ADDRESS INT16_MAX
 #define MAX_INSTRUCTIONS MAX_HACK_ADDRESS
@@ -19,7 +21,7 @@ void parse(FILE * file);
 bool is_Atype(const char *);
 bool is_label(const char *);
 bool is_Ctype(const char *);
-bool parse_A_instruction(const char *line, a_instruction *instr);
+
 
 typedef int16_t hack_addr;
 typedef int16_t opcode;
@@ -38,7 +40,7 @@ typedef struct c_instruction {
 } c_instruction;
 
 typedef struct a_instruction {
-    union addr_label {
+    union {
         hack_addr address;
         char * label;
     };
@@ -47,10 +49,12 @@ typedef struct a_instruction {
 
 typedef struct instruction {
     union a_c {
-        a_instruction;
-        c_instruction;
-    };
-    enum instr_type;
+        a_instruction a_instruction;
+        c_instruction c_instruction;
+    } instruction;
+    enum instr_type a_c;
 } instruction;
+
+bool parse_A_instruction(const char *line, a_instruction *instr);
 
 #endif

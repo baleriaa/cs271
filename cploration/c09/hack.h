@@ -1,4 +1,3 @@
-#include "parser.h"
 #define NUM_PREDEFINED_SYMBOLS 23
 
 typedef enum symbol_id {
@@ -26,10 +25,10 @@ typedef enum symbol_id {
 	SYM_KBD = 24676
 } symbol_id;
 
-struct predefined_symbol {
+typedef struct predefined_symbol {
 	char name[15];
 	int16_t address;
-} ;
+} predefined_symbol;
 
 static const predefined_symbol predefined_symbols[NUM_PREDEFINED_SYMBOLS] = {
 	{"R0", SYM_R0},

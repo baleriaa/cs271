@@ -1,16 +1,18 @@
 #include "stdio.h"
+#include "stdlib.h"
+#include "ctype.h"
 #include "string.h"
 #include "parser.h"
 #include "error.h"
 #include "symtable.h"
-#include "hack.h"
+//#include "hack.h"
 
 void parse (FILE * file){
 	char line[MAX_LINE_LENGTH] = "";
 	unsigned int line_num = 0;
 	unsigned int instr_num = 0;
 	instruction instr;
-
+	add_predefined_symbols();
 	while(fgets(line, sizeof(line), file)){
 		++line_num;
 
@@ -27,10 +29,10 @@ void parse (FILE * file){
 			char inst_type = 'A';
 			printf("%c  %s\n", inst_type, line);
 
-			if (!parse_A_instruction(line, &instr.instr.a)){
+			if (!parse_A_instruction(line, &instr.instruction.a_instruction)){
     			exit_program(EXIT_INVALID_A_INSTR, line_num, line);
  			}
- 			instr.itype = INST_A;
+ 		instr.a_c = A_type;
 		}
 
 		else if (is_label(line)){
@@ -103,29 +105,28 @@ void add_predefined_symbols(){
 	
 	for (int i = 0; i < NUM_PREDEFINED_SYMBOLS; i++){
 		predefined_symbol symbol = predefined_symbols[i];
-		symtable_insert(symbol);
+		symtable_insert(symbol.name, symbol.address);
 	}
 }
 
 bool parse_A_instruction(const char *line, a_instruction *instr){
 	char *s;
-	s = (char *)malloc(strlen(*line));
+	s = (char *)malloc(strlen(line));
 	strcpy(s, line + 1);
 	char *s_end = NULL;
 	long result = strtol(s, &s_end, 10);
 
 	if (s == s_end){
-		label->instr;
-		label = (char *)malloc(strlen(line));
-		strcpy(label, s);
-		is_address->instr = false;
+		instr->label = (char *)malloc(strlen(line));
+		strcpy(instr->label, s);
+		instr->is_addr = false;
 	}
 	else if (*s_end != 0) {
 		return false;
 	}
 	else {
-		address->instr = result;
-		is_addr->instr = true;
+		instr->address = result;
+		instr->is_addr = true;
 	}
 	return true;
 }
