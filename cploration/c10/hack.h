@@ -145,22 +145,22 @@ static inline comp_id str_to_destid(const char *s) {
 	else if (strcmp(s, "M") == 0) {
 		id = DEST_M;
 	}
-	else if (s == "D") {
+	else if (strcmp(s, "D") == 0) {
 		id = DEST_D;
 	}
-	else if (s == "DM") {
+	else if (strcmp(s, "DM") == 0) {
 		id = DEST_DM;
 	}
-	else if (s == "A") {
+	else if (strcmp(s, "A") == 0) {
 		id = DEST_A;
 	}
-	else if (s == "AM") {
+	else if (strcmp(s, "AM") == 0) {
 		id = DEST_AM;
 	}
-	else if (s == "AD") {
+	else if (strcmp(s, "AD") == 0) {
 		id = DEST_AD;
 	}
-	else if (s == "ADM") {
+	else if (strcmp(s, "ADM") == 0) {
 		id = DEST_ADM;
 	}
 	return id;
@@ -171,7 +171,7 @@ static inline comp_id str_to_compid(const char *s, int *a){
 	if (s == NULL){
 		id = 42;
 	}
-	else if (s == ){
-		id = 
+	else if (*a = 0){
+		if (strcmp(s, ))
 	}
 }
