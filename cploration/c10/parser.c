@@ -6,7 +6,7 @@
 #include "error.h"
 #include "symtable.h"
 
-void parse (FILE * file){
+int parse (FILE * file, instruction *instructions){
 	char line[MAX_LINE_LENGTH] = "";
 	char tmp_line[MAX_LINE_LENGTH];
 	unsigned int line_num = 0;
@@ -75,8 +75,9 @@ void parse (FILE * file){
 			char c_type = 'C';
 			printf("%c  %s\n", c_type, line);
 		}
-		++instr_num;
+		instructions[instr_num++] = instr;
 	}	
+	return instr_num;
 }
  
 char *strip(char *s){
