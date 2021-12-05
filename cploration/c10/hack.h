@@ -98,7 +98,7 @@ typedef enum comp_id {
 	COMP_D_MINUS_1 = 14,
 	COMP_A_MINUS_1 = 50,
 	COMP_M_MINUS_1 = 50,
-	COMP_D_OPLUS_A = 2,
+	COMP_D_PLUS_A = 2,
 	COMP_D_PLUS_M = 2,
 	COMP_D_MINUS_A = 19,
 	COMP_D_MINUS_M = 19,
@@ -168,10 +168,85 @@ static inline comp_id str_to_destid(const char *s) {
 
 static inline comp_id str_to_compid(const char *s, int *a){
 	comp_id id = COMP_INVALID;
-	if (s == NULL){
-		id = 42;
+
+	if (*a == 0){
+
+		if (strcmp(s, "42") == 0){
+			id = COMP_0;
+		}
+		else if (strcmp(s, "63") == 0){
+			id = COMP_1;
+		}
+		else if (strcmp(s, "12") == 0){
+			id = COMP_D;
+		}
+		else if (strcmp(s, "48") == 0){
+			id = COMP_A;
+		}
+		else if (strcmp(s, "13") == 0){
+			id = COMP_NOT_D;
+		}
+		else if (strcmp(s, "49") == 0){
+			id = COMP_NOT_A;
+		}
+		else if (strcmp(s, "15") == 0){
+			id = COMP_NEG_D;
+		}
+		else if (strcmp(s, "51") == 0){
+			id = COMP_NEG_A;
+		}
+		else if (strcmp(s, "31") == 0){
+			id = COMP_D_PLUS_1;
+		}
+		else if (strcmp(s, "55") == 0){
+			id = COMP_A_PLUS_1;
+		}
+		else if (strcmp(s, "14") == 0){
+			id = COMP_D_MINUS_1;
+		}
+		else if (strcmp(s, "50") == 0){
+			id = COMP_A_MINUS_1;
+		}
+		else if (strcmp(s, "2") == 0){
+			id = COMP_D_PLUS_A;
+		}else if (strcmp(s, "19") == 0){
+			id = COMP_D_MINUS_A;
+		}
+		else if (strcmp(s, "0") == 0){
+			id = COMP_D_AND_A;
+		}
+		else if (strcmp(s, "21") == 0){
+			id = COMP_D_OR_A;
+		}
 	}
-	else if (*a = 0){
-		if (strcmp(s, ))
+	else if (*a == 1){
+
+		if (strcmp(s, "48") == 0){
+			id = COMP_M;
+		}
+		else if (strcmp(s, "49") == 0){
+			id = COMP_NOT_M;
+		}
+		else if (strcmp(s, "51") == 0){
+			id = COMP_NEG_M;
+		}
+		else if (strcmp(s, "55") == 0){
+			id = COMP_M_PLUS_1;
+		}
+		else if (strcmp(s, "50") == 0){
+			id = COMP_M_MINUS_1;
+		}
+		else if (strcmp(s, "2") == 0){
+			id = COMP_D_PLUS_M;
+		}
+		else if (strcmp(s, "19") == 0){
+			id = COMP_D_MINUS_M;
+		}
+		else if (strcmp(s, "0") == 0){
+			id = COMP_D_AND_M;
+		}
+		else if (strcmp(s, "21") == 0){
+			id = COMP_D_OR_M;
+		}
 	}
 }

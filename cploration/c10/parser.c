@@ -5,14 +5,30 @@
 #include "parser.h"
 #include "error.h"
 #include "symtable.h"
-//#include "hack.h"
 
 void parse (FILE * file){
 	char line[MAX_LINE_LENGTH] = "";
+	char tmp_line[MAX_LINE_LENGTH];
 	unsigned int line_num = 0;
 	unsigned int instr_num = 0;
 	instruction instr;
 	add_predefined_symbols();
+	strcpy(tmp_line, line);
+	parse_C_instruction(tmp_line, &instr.instruction.c_instruction);
+
+	if (instr.instruction.c_instruction.dest == DEST_INVALID){
+		exit_program(EXIT_INVALID_C_DEST);
+	}
+
+	if (instr.instruction.c_instruction.comp == COMP_INVALID){
+		exit_program(EXIT_INVALID_C_COMP);
+	}
+
+	if (instr.instruction.c_instruction.jump == JMP_INVALID){
+		exit_program(EXIT_INVALID_C_JUMP);
+	}
+	instr.a_c = C_type;
+
 	while(fgets(line, sizeof(line), file)){
 		++line_num;
 
@@ -44,7 +60,7 @@ void parse (FILE * file){
 				exit_program(EXIT_INVALID_LABEL, line_num, line);
 			}
 
-			if (symtable_find(label) == NULL){
+			if (symtable_find(label) != NULL){
 				exit_program(EXIT_SYMBOL_ALREADY_EXISTS, line_num, line);
 			}
 
@@ -66,6 +82,7 @@ void parse (FILE * file){
 char *strip(char *s){
 	char s_new[strlen(s) + 1];
 	int i = 0;
+
 	for (char *s2 = s; *s2; s2++){
    		if (*s2 == '/' && *(s2+1) == '/'){
 			break;
@@ -74,10 +91,12 @@ char *strip(char *s){
 			s_new[i++] = *s2;	
 		}
 	}
+
 	s_new[i] = '\0';
 	strcpy(s, s_new);
 	return s;
 }
+
 bool is_Atype(const char *line){
 	return *line == '@';
 }
@@ -90,6 +109,7 @@ bool is_Ctype(const char *line){
 
 char *extract_label(const char *line, char* label){
 	int i = 0;
+
 	for (const char *line2 = line; *line2; line2++){
 		if (*line2 == '(' || *line2 == ')'){
 			continue;
@@ -121,12 +141,21 @@ bool parse_A_instruction(const char *line, a_instruction *instr){
 		strcpy(instr->label, s);
 		instr->is_addr = false;
 	}
+
 	else if (*s_end != 0) {
 		return false;
 	}
+
 	else {
 		instr->address = result;
 		instr->is_addr = true;
 	}
 	return true;
+}
+
+void parse_C_instruction(char *line, c_instruction *instr){
+	char *temp = strtok(line, ";");
+	char *jump = strtok(line, ";");
+	char *dest = strtok(temp, "=");
+	char *comp = strtok(temp, "=");
 }
