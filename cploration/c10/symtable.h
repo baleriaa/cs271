@@ -17,9 +17,9 @@ typedef int16_t hack_addr;
 } Symbol;
 
 struct Symbol* hashArray[SYMBOL_TABLE_SIZE];
-struct Symbol *symtable_find(char * name);
+struct Symbol *symtable_find(char * key);
 int hash(char *str);
-void symtable_insert(char* name, hack_addr addr);
+void symtable_insert(char* key, hack_addr addr);
 void symtable_display_table();
 
 #endif

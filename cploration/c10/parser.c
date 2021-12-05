@@ -159,4 +159,13 @@ void parse_C_instruction(char *line, c_instruction *instr){
 	char *jump = strtok(line, ";");
 	char *dest = strtok(temp, "=");
 	char *comp = strtok(temp, "=");
+	int a_value;
+
+	if (comp == NULL){
+		comp = dest;
+	}
+	instr->jump = str_to_jumpid(jump);
+	instr->comp = str_to_compid(comp, &a_value);
+	instr->dest = str_to_destid(dest);
+	instr->a = a_value == 0 ? 0 : 1;
 }

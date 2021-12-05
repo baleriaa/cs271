@@ -31,16 +31,16 @@ void symtable_insert(char* key, hack_addr addr){
 	hashArray[hashIndex] = item;
 }
 
-struct Symbol *symtable_find(char * name) {
+struct Symbol *symtable_find(char * key) {
 	//get the hash
-	int hashIndex = hash(name);
+	int hashIndex = hash(key);
 
 	//move in array until and empty
 	while(hashArray[hashIndex] != NULL) {
 
-		if(hashArray[hashIndex]->name == name) 
+		if(strcmp(hashArray[hashIndex]->name, key) == 0) {
 			return hashArray[hashIndex];
-
+		}	
 		//go to next cell
 			++hashIndex;
 		//wrap around the table

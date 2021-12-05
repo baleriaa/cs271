@@ -17,11 +17,10 @@
 
 char *extract_label(const char *line, char* label);
 char *strip(char *s);
-int parse(FILE * file, instruction *instructions);
+
 bool is_Atype(const char *);
 bool is_label(const char *);
 bool is_Ctype(const char *);
-
 
 typedef int16_t hack_addr;
 typedef int16_t opcode;
@@ -57,5 +56,5 @@ typedef struct instruction {
 
 bool parse_A_instruction(const char *line, a_instruction *instr);
 void parse_C_instruction(char *line, c_instruction *instr);
-
+int parse(FILE * file, instruction *instructions);
 #endif
